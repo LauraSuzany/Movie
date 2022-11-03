@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Movie.Models;
 
 namespace Movie.Context
 {
@@ -10,5 +11,7 @@ namespace Movie.Context
             //Caso não exista o banco ou a tabela cria automaticamente 
             Database.EnsureCreated();
         }
+
+        public DbSet<MovieModel> Movie { get; set; }
     }
 }

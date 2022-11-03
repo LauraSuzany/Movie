@@ -21,5 +21,12 @@ namespace Movie.Controllers
             MovieModel movieModel = _moviesRepository.AddMovie(movie);
             return Ok(movie);
         }
+
+        [HttpGet("Find/{nome}")]
+        public OkObjectResult FindByName([FromRoute] string nome)
+        {
+            object movieModels = _moviesRepository.FindByName(nome);
+            return Ok(movieModels);
+        }
     }
 }

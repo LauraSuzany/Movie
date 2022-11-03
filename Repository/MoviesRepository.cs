@@ -1,5 +1,7 @@
-﻿using Movie.Context;
+﻿using Microsoft.Extensions.WebEncoders.Testing;
+using Movie.Context;
 using Movie.Models;
+using System.Text.RegularExpressions;
 
 namespace Movie.Repository
 {
@@ -35,9 +37,17 @@ namespace Movie.Repository
             throw new NotImplementedException();
         }
 
-        public MovieModel FindByName(string name)
-        {
-            throw new NotImplementedException();
+        public object FindByName(string name)
+        { 
+            Microsoft.EntityFrameworkCore.DbSet<MovieModel> movie = _contexto.Movie;
+            IQueryable<MovieModel> movieModels = movie.Where(x => x.Nome.Contains(name));
+
+            if (movieModels.Count() <= 0)
+            {
+                object mensagemErro =  $"Nome {name} não encontrado";
+                return mensagemErro;
+            }
+            return movieModels;
         }
 
         public MovieModel Update(MovieModel movie, int id)

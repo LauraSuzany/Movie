@@ -5,9 +5,19 @@ namespace Movie.Repository
 {
     public class MoviesRepository : IMoviesRepository
     {
+
+        private readonly Contexto _contexto;
+
+        public MoviesRepository(Contexto context)
+        {
+            _contexto = context;
+        }
+
         public MovieModel AddMovie(MovieModel movie)
         {
-            throw new NotImplementedException();
+            _contexto.Add(movie);
+            _contexto.SaveChanges();
+            return movie;
         }
 
         public MovieModel Delete(int id)

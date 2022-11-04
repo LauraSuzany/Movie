@@ -8,7 +8,7 @@ namespace Movie.Repository
         MovieModel FindById(int id);
         object FindByName(string name);
         MovieModel AddMovie(MovieModel movie);
-        MovieModel Update(MovieModel movie, int id);
+        MovieModel Update(MovieModel movie);
 
         MovieModel Delete(int id);
     }

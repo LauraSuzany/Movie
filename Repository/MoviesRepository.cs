@@ -55,8 +55,12 @@ namespace Movie.Repository
             return movieModels;
         }
 
-        public MovieModel Update(MovieModel movie, int id)
+        public MovieModel Update(MovieModel movie)
         {
+            _contexto.Movie.Update(movie);
+            _contexto.SaveChanges();
+            return (movie);
+
             throw new NotImplementedException();
         }
     }

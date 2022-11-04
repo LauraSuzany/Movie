@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.WebEncoders.Testing;
 using Movie.Models;
 using Movie.Repository;
 
@@ -30,10 +31,17 @@ namespace Movie.Controllers
         }
 
         [HttpGet("Find/{id}")]
-        public OkObjectResult GetMovieById([FromRoute] int id)
+        public object GetMovieById([FromRoute] int id)
         {
             object movieModels = _moviesRepository.FindById(id);
             return Ok(movieModels);
+        }
+
+        [HttpDelete("Delete/{id}")]
+        public bool DeleteById([FromRoute] int id)
+        {
+            object movieModels = _moviesRepository.Delete(id);
+            return true;
         }
 
     }

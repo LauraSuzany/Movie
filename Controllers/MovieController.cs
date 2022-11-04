@@ -22,11 +22,19 @@ namespace Movie.Controllers
             return Ok(movie);
         }
 
-        [HttpGet("Find/{nome}")]
+        [HttpGet("Search/{nome}")]
         public OkObjectResult FindByName([FromRoute] string nome)
         {
             object movieModels = _moviesRepository.FindByName(nome);
             return Ok(movieModels);
         }
+
+        [HttpGet("Find/{id}")]
+        public OkObjectResult GetMovieById([FromRoute] int id)
+        {
+            object movieModels = _moviesRepository.FindById(id);
+            return Ok(movieModels);
+        }
+
     }
 }

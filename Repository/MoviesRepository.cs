@@ -34,6 +34,7 @@ namespace Movie.Repository
 
         public MovieModel FindById(int id)
         {
+            return _contexto.Movie.FirstOrDefault(x => x.id == id);
             throw new NotImplementedException();
         }
 

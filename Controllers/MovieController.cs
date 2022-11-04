@@ -44,5 +44,12 @@ namespace Movie.Controllers
             return true;
         }
 
+        [HttpPatch("Update")]
+        public MovieModel Update([FromBody] MovieModel movie)
+        {
+            _moviesRepository.Update(movie);
+            return movie;
+        }
+
     }
 }

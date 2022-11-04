@@ -24,7 +24,11 @@ namespace Movie.Repository
 
         public MovieModel Delete(int id)
         {
+            _contexto.Movie.Remove(FindById(id));
+            _contexto.SaveChanges();
+            return null;
             throw new NotImplementedException();
+
         }
 
         public List<MovieModel> FindAllMovies()

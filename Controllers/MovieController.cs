@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.WebEncoders.Testing;
-using Movie.Models;
+using Movie.Entity;
 using Movie.Repository;
+using Movie.Service;
 
 namespace Movie.Controllers
 {
@@ -9,47 +10,53 @@ namespace Movie.Controllers
     [Route("Api/[controller]")]
     public class MovieController : ControllerBase
     {
-        private readonly IMoviesRepository _moviesRepository;
+        private readonly IMovieService _movieService;
 
-        public MovieController(IMoviesRepository moviesRepository)
+        public MovieController(IMovieService movieService)
         {
-            _moviesRepository = moviesRepository;
+            _movieService = movieService;
         }
+
+        //public MovieController(IMoviesRepository moviesRepository)
+        //{
+        //    _moviesRepository = moviesRepository;
+        //}
 
         [HttpPost("Create")]
         public OkObjectResult Create([FromBody] MovieModel movie)
         {
-            MovieModel movieModel = _moviesRepository.AddMovie(movie);
-            return Ok(movie);
+            _movieService.AddMovie(movie);
+            return Ok(new {resonse = "CreateMoviesuccess", movie});
+           
         }
 
-        [HttpGet("Search/{nome}")]
-        public OkObjectResult FindByName([FromRoute] string nome)
-        {
-            object movieModels = _moviesRepository.FindByName(nome);
-            return Ok(movieModels);
-        }
+        //[HttpGet("Search/{nome}")]
+        //public OkObjectResult FindByName([FromRoute] string nome)
+        //{
+        //    object movieModels = _moviesRepository.FindByName(nome);
+        //    return Ok(movieModels);
+        //}
 
-        [HttpGet("Find/{id}")]
-        public object GetMovieById([FromRoute] int id)
-        {
-            object movieModels = _moviesRepository.FindById(id);
-            return Ok(movieModels);
-        }
+        //[HttpGet("Find/{id}")]
+        //public object GetMovieById([FromRoute] int id)
+        //{
+        //    object movieModels = _moviesRepository.FindById(id);
+        //    return Ok(movieModels);
+        //}
 
-        [HttpDelete("Delete/{id}")]
-        public bool DeleteById([FromRoute] int id)
-        {
-            object movieModels = _moviesRepository.Delete(id);
-            return true;
-        }
+        //[HttpDelete("Delete/{id}")]
+        //public bool DeleteById([FromRoute] int id)
+        //{
+        //    object movieModels = _moviesRepository.Delete(id);
+        //    return true;
+        //}
 
-        [HttpPatch("Update")]
-        public MovieModel Update([FromBody] MovieModel movie)
-        {
-            _moviesRepository.Update(movie);
-            return movie;
-        }
+        //[HttpPatch("Update")]
+        //public MovieEntity Update([FromBody] MovieEntity movie)
+        //{
+        //    _moviesRepository.Update(movie);
+        //    return movie;
+        //}
 
     }
 }

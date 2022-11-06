@@ -1,15 +1,15 @@
-﻿using Movie.Models;
+﻿using Movie.Entity;
 
 namespace Movie.Repository
 {
     public interface IMoviesRepository
     {
-        List<MovieModel> FindAllMovies();
-        MovieModel FindById(int id);
-        object FindByName(string name);
-        MovieModel AddMovie(MovieModel movie);
-        MovieModel Update(MovieModel movie);
+        //List<MovieEntity> FindAllMovies();
+        //MovieEntity FindById(int id);
+        //object FindByName(string name);
+        public void Add(MovieEntity movie);
+        //MovieEntity Update(MovieEntity movie);
 
-        MovieModel Delete(int id);
+        //MovieEntity Delete(int id);
     }
 }

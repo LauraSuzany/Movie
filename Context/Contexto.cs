@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Movie.Models;
+using Movie.Entity;
 
 namespace Movie.Context
 {
@@ -12,6 +12,6 @@ namespace Movie.Context
             Database.EnsureCreated();
         }
 
-        public DbSet<MovieModel> Movie { get; set; }
+        public DbSet<MovieEntity> Movie { get; set; }
     }
 }

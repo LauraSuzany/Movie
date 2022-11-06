@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.WebEncoders.Testing;
 using Movie.Context;
-using Movie.Models;
+using Movie.Entity;
 using System.Text.RegularExpressions;
 
 namespace Movie.Repository
@@ -15,53 +15,45 @@ namespace Movie.Repository
             _contexto = context;
         }
 
-        public MovieModel AddMovie(MovieModel movie)
+        public void Add(MovieEntity movie)
         {
             _contexto.Add(movie);
             _contexto.SaveChanges();
-            return movie;
         }
+        //public MovieEntity Delete(int id)
+        //{
+        //    _contexto.Movie.Remove(FindById(id));
+        //    _contexto.SaveChanges();
+        //    return null;
+        //    throw new NotImplementedException();
 
-        public MovieModel Delete(int id)
-        {
-            _contexto.Movie.Remove(FindById(id));
-            _contexto.SaveChanges();
-            return null;
-            throw new NotImplementedException();
+        //}
 
-        }
+        //public List<MovieEntity> FindAllMovies()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public List<MovieModel> FindAllMovies()
-        {
-            throw new NotImplementedException();
-        }
+        //public MovieEntity FindById(int id)
+        //{
+        //    return _contexto.Movie.FirstOrDefault(x => x.id == id);
+        //    throw new NotImplementedException();
+        //}
 
-        public MovieModel FindById(int id)
-        {
-            return _contexto.Movie.FirstOrDefault(x => x.id == id);
-            throw new NotImplementedException();
-        }
+        //public object FindByName(string name)
+        //{ 
+        //    Microsoft.EntityFrameworkCore.DbSet<MovieEntity> movie = _contexto.Movie;
+        //    IQueryable<MovieEntity> movieModels = movie.Where(x => x.Nome.Contains(name));
+        //    return movieModels;
+        //}
 
-        public object FindByName(string name)
-        { 
-            Microsoft.EntityFrameworkCore.DbSet<MovieModel> movie = _contexto.Movie;
-            IQueryable<MovieModel> movieModels = movie.Where(x => x.Nome.Contains(name));
+        //public MovieEntity Update(MovieEntity movie)
+        //{
+        //    _contexto.Movie.Update(movie);
+        //    _contexto.SaveChanges();
+        //    return (movie);
 
-            if (movieModels.Count() <= 0)
-            {
-                object mensagemErro =  $"Nome {name} não encontrado";
-                return mensagemErro;
-            }
-            return movieModels;
-        }
-
-        public MovieModel Update(MovieModel movie)
-        {
-            _contexto.Movie.Update(movie);
-            _contexto.SaveChanges();
-            return (movie);
-
-            throw new NotImplementedException();
-        }
+        //    throw new NotImplementedException();
+        //}
     }
 }

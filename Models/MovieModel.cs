@@ -14,5 +14,6 @@ namespace Movie.Entity
         public string Categoria { get; set; }
 
         public string Classificacao { get; set; }
+
     }
 }

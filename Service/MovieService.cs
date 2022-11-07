@@ -1,5 +1,8 @@
-﻿using Movie.Entity;
+﻿using Microsoft.AspNetCore.Http;
+using Movie.Entity;
 using Movie.Repository;
+using System.Globalization;
+using System.Threading.Tasks.Dataflow;
 
 namespace Movie.Service
 {
@@ -12,16 +15,23 @@ namespace Movie.Service
             _moviesRepository = moviesRepository;
         }
 
-        public void AddMovie(MovieModel movieModel)
+        public object AddMovie(MovieModel movieModel)
         {
+            //if (_moviesRepository.ExistName(movieModel.Nome)) {
+
+            //    return $"O titulo {movieModel.Nome} já existe!";
+
+            //}
+            
             MovieEntity movieEntity = new MovieEntity() { 
                 Nome = movieModel.Nome,
-                DataLancamento = movieModel.DataLancamento,
-                Categoria = movieModel.Categoria,
+                DataLancamento = Convert.ToDateTime(DateTime.Now.ToString("dd/MMM/yyyy") + " " + "10:15 PM")/*Add your time here*/;
+            Categoria = movieModel.Categoria,
                 Classificacao = movieModel.Classificacao,
                 Descricao = movieModel.Descricao
             };
-            _moviesRepository.Add(movieEntity);
+            DateTime DataLancamento;
+            return _moviesRepository.Add(movieEntity);
         }
     }
 }

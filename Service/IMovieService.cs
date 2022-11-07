@@ -4,6 +4,6 @@ namespace Movie.Service
 {
     public interface IMovieService
     {
-        public void AddMovie(MovieModel movieModel);
+        public object AddMovie(MovieModel movieModel);
     }
 }

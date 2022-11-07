@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace Movie.Entity
 {
     [Table("Filme")]
     public class MovieEntity
     {
+
         [Key]
         [Column("id")]
         public long id { get; set; }
@@ -14,8 +16,9 @@ namespace Movie.Entity
         [Column("nome")]
         public string Nome { get; set; }
 
-        [Display(Name = "lancamento")]
-        [Column("lancamento")]
+        [DataType(DataType.Date)]
+        [Display(Name = "data_lancamento")]
+        [Column("data_lancamento")]
         public DateTime DataLancamento { get; set; }
 
         [Display(Name = "Descricao")]
@@ -29,5 +32,7 @@ namespace Movie.Entity
         [Display(Name = "Classificacao")]
         [Column("classificacao")]
         public string Classificacao { get; set; }
+
     }
+
 }

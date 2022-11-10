@@ -1,4 +1,4 @@
-<h1 align="center"> Filme (CRUD) </h1> 
+<h1 align="center"> Filme </h1> 
 
 <div align="center">
 
@@ -10,7 +10,8 @@
 ![Imagem meramente ilustrativa](https://www.rollingstone.com/wp-content/uploads/2022/10/HorrorMovieList.jpg?w=1600&h=900&crop=1)
 
 
-O obejtivo dessa programa: Fazer o crud com a temática de filme (em desenvolvimento 👷)
+O obejtivo dessa programa: Fazer o crud com a temática de filme usando boas práticas de programação separando responsabilidades 
+(em desenvolvimento 👷)
 
 ✍ "Every day is a learning Day" business: L.M code e Tecnologia
 </div>

@@ -7,5 +7,6 @@ namespace Movie.Service
     {
         public object AddMovie(MovieModel movieModel);
         public object FindByID(int id);
+        public object FindByName(string name);
     }
 }

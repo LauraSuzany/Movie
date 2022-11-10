@@ -50,5 +50,16 @@ namespace Movie.Service
             MovieResponse movieResponse = MovieResponse.Map(movieEntity);
             return movieResponse;
         }
+
+        public object FindByName(string name)
+        {
+            IQueryable<MovieEntity> movieEntities = _moviesRepository.FindByName(name);
+            if (movieEntities.Count() == 0)
+            {
+                return $"O titulo {name} não existe!";
+            }
+            return movieEntities;
+
+        }
     }
 }

@@ -1,8 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.WebEncoders.Testing;
 using Movie.Entity;
-using Movie.Repository;
 using Movie.Service;
+using Newtonsoft.Json;
+using System.Net.Http.Json;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
+
+
 
 namespace Movie.Controllers
 {
@@ -17,17 +22,11 @@ namespace Movie.Controllers
             _movieService = movieService;
         }
 
-        //public MovieController(IMoviesRepository moviesRepository)
-        //{
-        //    _moviesRepository = moviesRepository;
-        //}
-
         [HttpPost("Create")]
-        public OkObjectResult Create([FromBody] MovieModel movie)
+        public IActionResult Create([FromBody] MovieModel movie)
         {
-            _movieService.AddMovie(movie);
-            return Ok(new {resonse = "CreateMoviesuccess", movie});
-           
+            object response = _movieService.AddMovie(movie);
+            return Ok(new{ response = response });
         }
 
         //[HttpGet("Search/{nome}")]

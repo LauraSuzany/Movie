@@ -2,6 +2,7 @@
 using Movie.Context;
 using Movie.Entity;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace Movie.Repository
 {
@@ -15,10 +16,18 @@ namespace Movie.Repository
             _contexto = context;
         }
 
-        public void Add(MovieEntity movie)
+        /// <summary>
+        /// add a new movie
+        /// </summary>
+        /// <param name="movie"> object movie </param>
+        /// <returns> return the movie registered </returns>
+        public object Add(MovieEntity movie)
         {
             _contexto.Add(movie);
             _contexto.SaveChanges();
+
+            return movie;
+
         }
         //public MovieEntity Delete(int id)
         //{
@@ -41,11 +50,18 @@ namespace Movie.Repository
         //}
 
         //public object FindByName(string name)
-        //{ 
+        //{
         //    Microsoft.EntityFrameworkCore.DbSet<MovieEntity> movie = _contexto.Movie;
         //    IQueryable<MovieEntity> movieModels = movie.Where(x => x.Nome.Contains(name));
         //    return movieModels;
         //}
+
+        public bool ExistName(string name)
+        {
+            Microsoft.EntityFrameworkCore.DbSet<MovieEntity> movie = _contexto.Movie;
+            bool IsNamePresent = movie.Select(x => x.Nome.Equals(name)).FirstOrDefault();
+            return IsNamePresent;
+        }
 
         //public MovieEntity Update(MovieEntity movie)
         //{

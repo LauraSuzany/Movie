@@ -26,7 +26,7 @@ namespace Movie.Controllers
         public IActionResult Create([FromBody] MovieModel movie)
         {
             object response = _movieService.AddMovie(movie);
-            return Ok(new{ response = response });
+            return Ok(new{ Data = response });
         }
 
         //[HttpGet("Search/{nome}")]
@@ -36,12 +36,12 @@ namespace Movie.Controllers
         //    return Ok(movieModels);
         //}
 
-        //[HttpGet("Find/{id}")]
-        //public object GetMovieById([FromRoute] int id)
-        //{
-        //    object movieModels = _moviesRepository.FindById(id);
-        //    return Ok(movieModels);
-        //}
+        [HttpGet("Find/{id}")]
+        public object GetMovieById([FromRoute] int id)
+        {
+            object response = _movieService.FindByID(id);
+            return Ok(new { Data = response });
+        }
 
         //[HttpDelete("Delete/{id}")]
         //public bool DeleteById([FromRoute] int id)

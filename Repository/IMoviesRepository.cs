@@ -6,7 +6,7 @@ namespace Movie.Repository
     {
         //List<MovieEntity> FindAllMovies();
         MovieEntity FindById(int id);
-        //object FindByName(string name);
+        public IQueryable<MovieEntity> FindByName(string name);
         public bool ExistName(string name);
         public object Add(MovieEntity movie);
         //MovieEntity Update(MovieEntity movie);

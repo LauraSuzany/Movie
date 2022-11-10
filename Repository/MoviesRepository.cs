@@ -66,17 +66,29 @@ namespace Movie.Repository
 
         }
 
-        //public object FindByName(string name)
-        //{
-        //    Microsoft.EntityFrameworkCore.DbSet<MovieEntity> movie = _contexto.Movie;
-        //    IQueryable<MovieEntity> movieModels = movie.Where(x => x.Nome.Contains(name));
-        //    return movieModels;
-        //}
+        public IQueryable<MovieEntity> FindByName(string name)
+        {
+            try
+            {
+                Microsoft.EntityFrameworkCore.DbSet<MovieEntity> movie = _contexto.Movie;
+                IQueryable<MovieEntity> movieModels = movie.Where(x => x.Nome.Contains(name));
+                return movieModels;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                //_contexto.Dispose();
+            }
+
+        }
 
         public bool ExistName(string name)
         {
             Microsoft.EntityFrameworkCore.DbSet<MovieEntity> movie = _contexto.Movie;
-            bool IsNamePresent = movie.Select(x => x.Nome.Equals(name)).FirstOrDefault();
+            bool IsNamePresent = movie.Where(x => x.Nome.Equals(name)).Select(x => x.Nome.Equals(name)).FirstOrDefault();
             return IsNamePresent;
         }
 

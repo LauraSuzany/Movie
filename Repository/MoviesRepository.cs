@@ -43,11 +43,28 @@ namespace Movie.Repository
         //    throw new NotImplementedException();
         //}
 
-        //public MovieEntity FindById(int id)
-        //{
-        //    return _contexto.Movie.FirstOrDefault(x => x.id == id);
-        //    throw new NotImplementedException();
-        //}
+        /// <summary>
+        /// Search for a movie ID
+        /// </summary>
+        /// <param name="id">Id of the movie</param>
+        /// <returns>The object of the movie</returns>
+        public MovieEntity FindById(int id)
+        {
+            try
+            {
+                MovieEntity? movieEntity = _contexto.Movie.FirstOrDefault(x => x.id == id);
+                return movieEntity;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _contexto.Dispose();
+            }
+
+        }
 
         //public object FindByName(string name)
         //{

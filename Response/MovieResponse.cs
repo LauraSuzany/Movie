@@ -10,15 +10,15 @@ namespace Movie.Response
         public string categoria { get; set; }
         public string classificacao { get; set; }
 
-        public static MovieResponse Map(MovieModel model)
+        public static MovieResponse Map(MovieEntity movieEntity)
         {
             MovieResponse response = new MovieResponse
             {
-                titulo = model.Nome,
-                dataLancamento = model.DataLancamento,
-                descricao = model.Descricao,
-                categoria = model.Categoria,
-                classificacao = model.Classificacao,
+                titulo = movieEntity.Nome,
+                dataLancamento = movieEntity.DataLancamento.ToString("dd/MM/yyyy"),
+                descricao = movieEntity.Descricao,
+                categoria = movieEntity.Categoria,
+                classificacao = movieEntity.Classificacao,
             };
             return response;
         }

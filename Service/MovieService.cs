@@ -35,7 +35,19 @@ namespace Movie.Service
                 Descricao = movieModel.Descricao
             };
              _moviesRepository.Add(movieEntity);
-            MovieResponse movieResponse = MovieResponse.Map(movieModel);
+            MovieResponse movieResponse = MovieResponse.Map(movieEntity);
+            return movieResponse;
+        }
+
+        public object FindByID(int id)
+        {
+            MovieEntity movieEntity = _moviesRepository.FindById(id);
+            if (movieEntity == null)
+            {
+                return $"O ID {id} não existe!";
+            }
+            
+            MovieResponse movieResponse = MovieResponse.Map(movieEntity);
             return movieResponse;
         }
     }

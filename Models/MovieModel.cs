@@ -7,7 +7,7 @@ namespace Movie.Entity
     {
         public string Nome { get; set; }
 
-        public DateTime DataLancamento { get; set; }
+        public string DataLancamento { get; set; }
 
         public string Descricao { get; set; }
 

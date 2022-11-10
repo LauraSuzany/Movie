@@ -22,11 +22,6 @@ namespace Movie.Controllers
             _movieService = movieService;
         }
 
-        //public MovieController(IMoviesRepository moviesRepository)
-        //{
-        //    _moviesRepository = moviesRepository;
-        //}
-
         [HttpPost("Create")]
         public IActionResult Create([FromBody] MovieModel movie)
         {

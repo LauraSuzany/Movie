@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Movie.Entity;
 using Movie.Repository;
+using Movie.Response;
 using System.Globalization;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks.Dataflow;
 
 namespace Movie.Service
@@ -17,21 +20,23 @@ namespace Movie.Service
 
         public object AddMovie(MovieModel movieModel)
         {
-            //if (_moviesRepository.ExistName(movieModel.Nome)) {
+            if (_moviesRepository.ExistName(movieModel.Nome))
+            {
 
-            //    return $"O titulo {movieModel.Nome} já existe!";
+                return $"O titulo {movieModel.Nome} já existe!";
 
-            //}
-            
-            MovieEntity movieEntity = new MovieEntity() { 
+            }
+
+            MovieEntity movieEntity = new MovieEntity() {
                 Nome = movieModel.Nome,
-                DataLancamento = Convert.ToDateTime(DateTime.Now.ToString("dd/MMM/yyyy") + " " + "10:15 PM")/*Add your time here*/;
-            Categoria = movieModel.Categoria,
+                DataLancamento = DateTime.Parse(DateTime.Parse(movieModel.DataLancamento).ToString("dd/MM/yyyy")),
+                Categoria = movieModel.Categoria,
                 Classificacao = movieModel.Classificacao,
                 Descricao = movieModel.Descricao
             };
-            DateTime DataLancamento;
-            return _moviesRepository.Add(movieEntity);
+             _moviesRepository.Add(movieEntity);
+            MovieResponse movieResponse = MovieResponse.Map(movieModel);
+            return movieResponse;
         }
     }
 }

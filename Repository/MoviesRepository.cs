@@ -16,6 +16,11 @@ namespace Movie.Repository
             _contexto = context;
         }
 
+        /// <summary>
+        /// add a new movie
+        /// </summary>
+        /// <param name="movie"> object movie </param>
+        /// <returns> return the movie registered </returns>
         public object Add(MovieEntity movie)
         {
             _contexto.Add(movie);

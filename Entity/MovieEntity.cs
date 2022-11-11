@@ -17,8 +17,8 @@ namespace Movie.Entity
         public string Nome { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "data_lancamento")]
-        [Column("data_lancamento")]
+        [Display(Name = "lancamento")]
+        [Column("lancamento")]
         public DateTime DataLancamento { get; set; }
 
         [Display(Name = "Descricao")]

@@ -23,8 +23,20 @@ namespace Movie.Repository
         /// <returns> return the movie registered </returns>
         public object Add(MovieEntity movie)
         {
-            _contexto.Add(movie);
-            _contexto.SaveChanges();
+            try
+            {
+                _contexto.Add(movie);
+                _contexto.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _contexto.Dispose();
+            }
+
 
             return movie;
 

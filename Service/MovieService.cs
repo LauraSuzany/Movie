@@ -92,5 +92,11 @@ namespace Movie.Service
             _moviesRepository.DeleteByID(id);
             return $"O filme foi deletado com sucesso!";
         }
+
+        public List<MovieEntity> GetMovies()
+        {
+            List<MovieEntity> movieEntities = _moviesRepository.GetAllMovies();
+            return movieEntities;
+        }
     }
 }

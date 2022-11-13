@@ -28,10 +28,24 @@ namespace Movie.Repository
 
         }
 
-        //public List<MovieEntity> FindAllMovies()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public List<MovieEntity> GetAllMovies()
+        {
+            try
+            {
+                List<MovieEntity> movieEntities = _contexto.Movie.ToList();
+                return movieEntities;
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _contexto.Dispose();
+            }
+
+        }
 
         /// <summary>
         /// Search for a movie ID

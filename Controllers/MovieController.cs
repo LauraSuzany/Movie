@@ -29,18 +29,18 @@ namespace Movie.Controllers
             return Ok(new { Data = response });
         }
 
-        [HttpGet("Search/{nome}")]
-        public OkObjectResult FindByName([FromRoute] string nome)
-        {
-            object movieModels = _movieService.FindByName(nome);
-            return Ok(new { Data = movieModels });
-        }
-
         [HttpGet("Find/{id}")]
         public object GetMovieById([FromRoute] int id)
         {
             object response = _movieService.FindByID(id);
             return Ok(new { Data = response });
+        }
+
+        [HttpGet("Search/{nome}")]
+        public OkObjectResult FindByName([FromRoute] string nome)
+        {
+            object movieModels = _movieService.FindByName(nome);
+            return Ok(new { Data = movieModels });
         }
 
         [HttpPatch("Update/{id}")]

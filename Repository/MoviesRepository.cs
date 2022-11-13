@@ -1,8 +1,5 @@
-﻿using Microsoft.Extensions.WebEncoders.Testing;
-using Movie.Context;
+﻿using Movie.Context;
 using Movie.Entity;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
 
 namespace Movie.Repository
 {
@@ -29,14 +26,6 @@ namespace Movie.Repository
             return movie;
 
         }
-        //public MovieEntity Delete(int id)
-        //{
-        //    _contexto.Movie.Remove(FindById(id));
-        //    _contexto.SaveChanges();
-        //    return null;
-        //    throw new NotImplementedException();
-
-        //}
 
         //public List<MovieEntity> FindAllMovies()
         //{
@@ -59,11 +48,6 @@ namespace Movie.Repository
             {
                 throw ex;
             }
-            finally
-            {
-                _contexto.Dispose();
-            }
-
         }
 
         public IQueryable<MovieEntity> FindByName(string name)
@@ -77,10 +61,6 @@ namespace Movie.Repository
             catch(Exception ex)
             {
                 throw ex;
-            }
-            finally
-            {
-                //_contexto.Dispose();
             }
 
         }
@@ -100,5 +80,28 @@ namespace Movie.Repository
 
         //    throw new NotImplementedException();
         //}
+
+        /// <summary>
+        /// Delete movie by ID
+        /// </summary>
+        /// <param name="id">Id movie</param>
+        /// <returns></returns>
+        public void DeleteByID(int id)
+        {
+            try
+            {
+                _contexto.Movie.Remove(FindById(id));
+                _contexto.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _contexto.Dispose();
+            }
+
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks.Dataflow;
+using System.Xml.Linq;
 
 namespace Movie.Service
 {
@@ -60,6 +61,16 @@ namespace Movie.Service
             }
             return movieEntities;
 
+        }
+        public string DeleteMovie(int id)
+        {
+            MovieEntity findById = _moviesRepository.FindById(id);
+            if (findById == null)
+            {
+                return $"O id {id} não existe!";
+            }
+            _moviesRepository.DeleteByID(id);
+            return $"O filme foi deletado com sucesso!";
         }
     }
 }

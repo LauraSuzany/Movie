@@ -2,6 +2,7 @@
 using Movie.Entity;
 using Movie.Service;
 using Newtonsoft.Json;
+using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -43,12 +44,12 @@ namespace Movie.Controllers
             return Ok(new { Data = response });
         }
 
-        //[HttpDelete("Delete/{id}")]
-        //public bool DeleteById([FromRoute] int id)
-        //{
-        //    object movieModels = _moviesRepository.Delete(id);
-        //    return true;
-        //}
+        [HttpDelete("Delete/{id}")]
+        public ObjectResult DeleteById([FromRoute] int id)
+        {
+            string response = _movieService.DeleteMovie(id);
+            return Ok(new { Data = response });
+        }
 
         //[HttpPatch("Update")]
         //public MovieEntity Update([FromBody] MovieEntity movie)

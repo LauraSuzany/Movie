@@ -1,13 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Movie.Entity;
 using Movie.Service;
-using Newtonsoft.Json;
-using System.Net.Http.Json;
-using System.Text.Json;
-using System.Text.Json.Nodes;
-using System.Text.Json.Serialization;
-
-
 
 namespace Movie.Controllers
 {
@@ -29,11 +22,11 @@ namespace Movie.Controllers
             return Ok(new{ Data = response });
         }
 
-        [HttpGet("Search/{nome}")]
-        public OkObjectResult FindByName([FromRoute] string nome)
+        [HttpGet("GetMovies")]
+        public IActionResult ListAllMovies()
         {
-            object movieModels = _movieService.FindByName(nome);
-            return Ok(new { Data = movieModels });
+            object response = _movieService.GetMovies();
+            return Ok(new { Data = response });
         }
 
         [HttpGet("Find/{id}")]
@@ -43,19 +36,26 @@ namespace Movie.Controllers
             return Ok(new { Data = response });
         }
 
-        //[HttpDelete("Delete/{id}")]
-        //public bool DeleteById([FromRoute] int id)
-        //{
-        //    object movieModels = _moviesRepository.Delete(id);
-        //    return true;
-        //}
+        [HttpGet("Search/{nome}")]
+        public OkObjectResult FindByName([FromRoute] string nome)
+        {
+            object movieModels = _movieService.FindByName(nome);
+            return Ok(new { Data = movieModels });
+        }
 
-        //[HttpPatch("Update")]
-        //public MovieEntity Update([FromBody] MovieEntity movie)
-        //{
-        //    _moviesRepository.Update(movie);
-        //    return movie;
-        //}
+        [HttpPatch("Update/{id}")]
+        public IActionResult Update([FromRoute] int id, [FromBody] MovieModel movieModel)
+        {
+            object response = _movieService.UpdateMovie(id, movieModel);
+            return Ok(new { Data = response });
+        }
+
+        [HttpDelete("Delete/{id}")]
+        public ObjectResult DeleteById([FromRoute] int id)
+        {
+            string response = _movieService.DeleteMovie(id);
+            return Ok(new { Data = response });
+        }
 
     }
 }

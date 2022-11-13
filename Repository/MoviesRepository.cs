@@ -1,8 +1,6 @@
-﻿using Microsoft.Extensions.WebEncoders.Testing;
+﻿using Microsoft.EntityFrameworkCore;
 using Movie.Context;
 using Movie.Entity;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
 
 namespace Movie.Repository
 {
@@ -39,21 +37,28 @@ namespace Movie.Repository
 
 
             return movie;
-
         }
-        //public MovieEntity Delete(int id)
-        //{
-        //    _contexto.Movie.Remove(FindById(id));
-        //    _contexto.SaveChanges();
-        //    return null;
-        //    throw new NotImplementedException();
-
-        //}
-
-        //public List<MovieEntity> FindAllMovies()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        
+        /// <summary>
+        /// Get all movies
+        /// </summary>
+        /// <returns>all movies</returns>
+        public List<MovieEntity> GetAllMovies()
+        {
+            try
+            {
+                List<MovieEntity> movieEntities = _contexto.Movie.ToList();
+                return movieEntities;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _contexto.Dispose();
+            }
+        }
 
         /// <summary>
         /// Search for a movie ID
@@ -64,8 +69,66 @@ namespace Movie.Repository
         {
             try
             {
-                MovieEntity? movieEntity = _contexto.Movie.FirstOrDefault(x => x.id == id);
+                /*.AsNoTracking() foi usado pois está dando um exceção de contexto, pois em alguns métodos são usados mais de um contexto
+                 * de requisição ao banco ex: UpdateMovie() usa findByid (que abre um contexto e isto é rastreado) e UpdateById que abre 
+                 * outro contexto que também é rastreado, logo, como a injeção de dependência é uma singleton os contextos abertos geram 
+                 * conflito logo o método AsNoTracking() não rastreia esse contexto porém ele pode ser usado apenas para requisições que não 
+                 * fazem alteração no banco
+                 */
+
+                MovieEntity? movieEntity = _contexto.Movie.AsNoTracking().FirstOrDefault(x => x.Id == id);
                 return movieEntity;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public bool FindByName(string name)
+        {
+            Microsoft.EntityFrameworkCore.DbSet<MovieEntity> movie = _contexto.Movie;
+            bool IsNamePresent = movie.Where(x => x.Nome.Equals(name)).Select(x => x.Nome.Equals(name)).FirstOrDefault();
+            return IsNamePresent;
+        }
+
+        /// <summary>
+        /// Get the movies that contain the name
+        /// </summary>
+        /// <param name="name"> name you want to find</param>
+        /// <returns>All movies that contain that name you passed</returns>
+        public IQueryable<MovieEntity> NameExist(string name)
+        {
+            try
+            {
+                Microsoft.EntityFrameworkCore.DbSet<MovieEntity> movie = _contexto.Movie;
+                IQueryable<MovieEntity> movieModels = movie.Where(x => x.Nome.Contains(name));
+                return movieModels;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Update movie by ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="movie"></param>
+        /// <returns>The object that was updated</returns>
+        public MovieEntity UpdateById(MovieEntity movie)
+        {
+            try
+            {
+                _contexto.Movie.Update(movie);
+                _contexto.SaveChanges();
+                return (movie);
             }
             catch(Exception ex)
             {
@@ -78,39 +141,27 @@ namespace Movie.Repository
 
         }
 
-        public IQueryable<MovieEntity> FindByName(string name)
+        /// <summary>
+        /// Delete movie by ID
+        /// </summary>
+        /// <param name="id">Id movie</param>
+        /// <returns></returns>
+        public void DeleteByID(int id)
         {
             try
             {
-                Microsoft.EntityFrameworkCore.DbSet<MovieEntity> movie = _contexto.Movie;
-                IQueryable<MovieEntity> movieModels = movie.Where(x => x.Nome.Contains(name));
-                return movieModels;
+                _contexto.Movie.Remove(FindById(id));
+                _contexto.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
             finally
             {
-                //_contexto.Dispose();
+                _contexto.Dispose();
             }
 
         }
-
-        public bool ExistName(string name)
-        {
-            Microsoft.EntityFrameworkCore.DbSet<MovieEntity> movie = _contexto.Movie;
-            bool IsNamePresent = movie.Where(x => x.Nome.Equals(name)).Select(x => x.Nome.Equals(name)).FirstOrDefault();
-            return IsNamePresent;
-        }
-
-        //public MovieEntity Update(MovieEntity movie)
-        //{
-        //    _contexto.Movie.Update(movie);
-        //    _contexto.SaveChanges();
-        //    return (movie);
-
-        //    throw new NotImplementedException();
-        //}
     }
 }

@@ -10,7 +10,6 @@ namespace Movie.Repository
         public bool ExistName(string name);
         public object Add(MovieEntity movie);
         //MovieEntity Update(MovieEntity movie);
-
-        //MovieEntity Delete(int id);
+        public void DeleteByID(int id);
     }
 }

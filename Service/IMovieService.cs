@@ -9,5 +9,6 @@ namespace Movie.Service
         public object FindByID(int id);
         public object FindByName(string name);
         public string DeleteMovie(int id);
+        public object UpdateMovie(int id, MovieModel movieModel);
     }
 }

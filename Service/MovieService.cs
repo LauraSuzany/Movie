@@ -23,9 +23,7 @@ namespace Movie.Service
         {
             if (_moviesRepository.ExistName(movieModel.Nome))
             {
-
                 return $"O titulo {movieModel.Nome} já existe!";
-
             }
 
             MovieEntity movieEntity = new MovieEntity() {
@@ -60,8 +58,30 @@ namespace Movie.Service
                 return $"O titulo {name} não existe!";
             }
             return movieEntities;
-
         }
+
+        public object UpdateMovie(int id, MovieModel movieModel)
+        {
+            MovieEntity findById = _moviesRepository.FindById(id);
+            if (findById == null)
+            {
+                return $"O id {id} não existe!";
+            }
+            
+            MovieEntity movieEntityUpdate = new MovieEntity()
+            {   id = id,
+                Nome = movieModel.Nome,
+                DataLancamento = DateTime.Parse(DateTime.Parse(movieModel.DataLancamento).ToString("dd/MM/yyyy")),
+                Categoria = movieModel.Categoria,
+                Classificacao = movieModel.Classificacao,
+                Descricao = movieModel.Descricao
+            };
+
+            MovieEntity updatebyId = _moviesRepository.UpdateById(movieEntityUpdate);
+            MovieResponse movieResponse = MovieResponse.Map(updatebyId);
+            return movieResponse;
+        }
+
         public string DeleteMovie(int id)
         {
             MovieEntity findById = _moviesRepository.FindById(id);

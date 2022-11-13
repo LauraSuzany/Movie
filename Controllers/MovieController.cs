@@ -1,14 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Movie.Entity;
 using Movie.Service;
-using Newtonsoft.Json;
-using System.Net;
-using System.Net.Http.Json;
-using System.Text.Json;
-using System.Text.Json.Nodes;
-using System.Text.Json.Serialization;
-
-
 
 namespace Movie.Controllers
 {
@@ -44,19 +36,19 @@ namespace Movie.Controllers
             return Ok(new { Data = response });
         }
 
+        [HttpPatch("Update/{id}")]
+        public IActionResult Update([FromRoute] int id, [FromBody] MovieModel movieModel)
+        {
+            object response = _movieService.UpdateMovie(id, movieModel);
+            return Ok(new { Data = response });
+        }
+
         [HttpDelete("Delete/{id}")]
         public ObjectResult DeleteById([FromRoute] int id)
         {
             string response = _movieService.DeleteMovie(id);
             return Ok(new { Data = response });
         }
-
-        //[HttpPatch("Update")]
-        //public MovieEntity Update([FromBody] MovieEntity movie)
-        //{
-        //    _moviesRepository.Update(movie);
-        //    return movie;
-        //}
 
     }
 }

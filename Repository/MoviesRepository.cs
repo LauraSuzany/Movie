@@ -63,7 +63,7 @@ namespace Movie.Repository
                  * fazem alteração no banco
                  */
 
-                MovieEntity? movieEntity = _contexto.Movie.AsNoTracking().FirstOrDefault(x => x.id == id);
+                MovieEntity? movieEntity = _contexto.Movie.AsNoTracking().FirstOrDefault(x => x.Id == id);
                 return movieEntity;
             }
             catch(Exception ex)

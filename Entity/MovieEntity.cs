@@ -10,14 +10,15 @@ namespace Movie.Entity
 
         [Key]
         [Column("id")]
-        public long id { get; set; }
+        [Display(Name = "Id")]
+        public long Id { get; set; }
 
         [Display(Name = "Nome")]
         [Column("nome")]
         public string Nome { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "data_lancamento")]
+        [Display(Name = "Data de lancamento")]
         [Column("data_lancamento")]
         public DateTime DataLancamento { get; set; }
 

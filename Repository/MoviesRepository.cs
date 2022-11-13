@@ -1,4 +1,5 @@
-﻿using Movie.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using Movie.Context;
 using Movie.Entity;
 
 namespace Movie.Repository
@@ -41,7 +42,14 @@ namespace Movie.Repository
         {
             try
             {
-                MovieEntity? movieEntity = _contexto.Movie.FirstOrDefault(x => x.id == id);
+                /*.AsNoTracking() foi usado pois está dando um exceção de contexto, pois em alguns métodos são usados mais de um contexto
+                 * de requisição ao banco ex: UpdateMovie() usa findByid (que abre um contexto e isto é rastreado) e UpdateById que abre 
+                 * outro contexto que também é rastreado, logo, como a injeção de dependência é uma singleton os contextos abertos geram 
+                 * conflito logo o método AsNoTracking() não rastreia esse contexto porém ele pode ser usado apenas para requisições que não 
+                 * fazem alteração no banco
+                 */
+
+                MovieEntity? movieEntity = _contexto.Movie.AsNoTracking().FirstOrDefault(x => x.id == id);
                 return movieEntity;
             }
             catch(Exception ex)
@@ -72,14 +80,30 @@ namespace Movie.Repository
             return IsNamePresent;
         }
 
-        //public MovieEntity Update(MovieEntity movie)
-        //{
-        //    _contexto.Movie.Update(movie);
-        //    _contexto.SaveChanges();
-        //    return (movie);
+        /// <summary>
+        /// Update movie by ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="movie"></param>
+        /// <returns>The object that was updated</returns>
+        public MovieEntity UpdateById(MovieEntity movie)
+        {
+            try
+            {
+                _contexto.Movie.Update(movie);
+                _contexto.SaveChanges();
+                return (movie);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _contexto.Dispose();
+            }
 
-        //    throw new NotImplementedException();
-        //}
+        }
 
         /// <summary>
         /// Delete movie by ID

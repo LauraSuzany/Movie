@@ -5,6 +5,8 @@ namespace Movie.Entity
 {
     public class MovieModel
     {
+        public long Id { get; set; }
+
         public string Nome { get; set; }
 
         public string DataLancamento { get; set; }

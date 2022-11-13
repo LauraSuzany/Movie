@@ -9,7 +9,7 @@ namespace Movie.Repository
         public IQueryable<MovieEntity> FindByName(string name);
         public bool ExistName(string name);
         public object Add(MovieEntity movie);
-        //MovieEntity Update(MovieEntity movie);
+        public MovieEntity UpdateById(MovieEntity movie);
         public void DeleteByID(int id);
     }
 }

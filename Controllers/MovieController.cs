@@ -22,6 +22,13 @@ namespace Movie.Controllers
             return Ok(new{ Data = response });
         }
 
+        [HttpGet("GetMovies")]
+        public IActionResult ListAllMovies()
+        {
+            object response = _movieService.GetMovies();
+            return Ok(new { Data = response });
+        }
+
         [HttpGet("Search/{nome}")]
         public OkObjectResult FindByName([FromRoute] string nome)
         {

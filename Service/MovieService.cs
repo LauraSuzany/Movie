@@ -21,7 +21,7 @@ namespace Movie.Service
 
         public object AddMovie(MovieModel movieModel)
         {
-            if (_moviesRepository.ExistName(movieModel.Nome))
+            if (_moviesRepository.FindByName(movieModel.Nome))
             {
                 return $"O titulo {movieModel.Nome} já existe!";
             }
@@ -38,6 +38,12 @@ namespace Movie.Service
             return movieResponse;
         }
 
+        public List<MovieEntity> GetMovies()
+        {
+            List<MovieEntity> movieEntities = _moviesRepository.GetAllMovies();
+            return movieEntities;
+        }
+
         public object FindByID(int id)
         {
             MovieEntity movieEntity = _moviesRepository.FindById(id);
@@ -52,7 +58,7 @@ namespace Movie.Service
 
         public object FindByName(string name)
         {
-            IQueryable<MovieEntity> movieEntities = _moviesRepository.FindByName(name);
+            IQueryable<MovieEntity> movieEntities = _moviesRepository.NameExist(name);
             if (movieEntities.Count() == 0)
             {
                 return $"O titulo {name} não existe!";
@@ -93,10 +99,5 @@ namespace Movie.Service
             return $"O filme foi deletado com sucesso!";
         }
 
-        public List<MovieEntity> GetMovies()
-        {
-            List<MovieEntity> movieEntities = _moviesRepository.GetAllMovies();
-            return movieEntities;
-        }
     }
 }

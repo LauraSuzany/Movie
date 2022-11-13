@@ -23,18 +23,19 @@ namespace Movie.Repository
         {
             _contexto.Add(movie);
             _contexto.SaveChanges();
-
             return movie;
-
         }
-
+        
+        /// <summary>
+        /// Get all movies
+        /// </summary>
+        /// <returns>all movies</returns>
         public List<MovieEntity> GetAllMovies()
         {
             try
             {
                 List<MovieEntity> movieEntities = _contexto.Movie.ToList();
                 return movieEntities;
-
             }
             catch(Exception ex)
             {
@@ -44,7 +45,6 @@ namespace Movie.Repository
             {
                 _contexto.Dispose();
             }
-
         }
 
         /// <summary>
@@ -72,7 +72,24 @@ namespace Movie.Repository
             }
         }
 
-        public IQueryable<MovieEntity> FindByName(string name)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public bool FindByName(string name)
+        {
+            Microsoft.EntityFrameworkCore.DbSet<MovieEntity> movie = _contexto.Movie;
+            bool IsNamePresent = movie.Where(x => x.Nome.Equals(name)).Select(x => x.Nome.Equals(name)).FirstOrDefault();
+            return IsNamePresent;
+        }
+
+        /// <summary>
+        /// Get the movies that contain the name
+        /// </summary>
+        /// <param name="name"> name you want to find</param>
+        /// <returns>All movies that contain that name you passed</returns>
+        public IQueryable<MovieEntity> NameExist(string name)
         {
             try
             {
@@ -80,18 +97,10 @@ namespace Movie.Repository
                 IQueryable<MovieEntity> movieModels = movie.Where(x => x.Nome.Contains(name));
                 return movieModels;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
-
-        }
-
-        public bool ExistName(string name)
-        {
-            Microsoft.EntityFrameworkCore.DbSet<MovieEntity> movie = _contexto.Movie;
-            bool IsNamePresent = movie.Where(x => x.Nome.Equals(name)).Select(x => x.Nome.Equals(name)).FirstOrDefault();
-            return IsNamePresent;
         }
 
         /// <summary>

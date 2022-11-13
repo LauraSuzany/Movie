@@ -4,12 +4,18 @@ namespace Movie.Repository
 {
     public interface IMoviesRepository
     {
-        MovieEntity FindById(int id);
-        public IQueryable<MovieEntity> FindByName(string name);
-        public bool ExistName(string name);
         public object Add(MovieEntity movie);
+
         public List<MovieEntity> GetAllMovies();
+
+        MovieEntity FindById(int id);
+
+        public bool FindByName(string name);
+
+        public IQueryable<MovieEntity> NameExist(string name);
+
         public MovieEntity UpdateById(MovieEntity movie);
+
         public void DeleteByID(int id);
     }
 }

@@ -75,7 +75,7 @@ namespace Movie.Service
             }
             
             MovieEntity movieEntityUpdate = new MovieEntity()
-            {   id = id,
+            {   Id = id,
                 Nome = movieModel.Nome,
                 DataLancamento = DateTime.Parse(DateTime.Parse(movieModel.DataLancamento).ToString("dd/MM/yyyy")),
                 Categoria = movieModel.Categoria,

@@ -1,4 +1,5 @@
-﻿using Movie.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using Movie.Context;
 using Movie.Entity;
 using Movie.Models;
 
@@ -32,5 +33,16 @@ namespace Movie.Repository
             return userEntity;
         }
 
+        /// <summary>
+        /// Find nickname
+        /// </summary>
+        /// <param name="nickname"></param>
+        /// <returns>true or false</returns>
+        public bool FindByNickname(string nickname)
+        {
+            DbSet<UserEntity> userEntity = _contexto.User;
+            bool IsNamePresent = userEntity.Where(x => x.Nickname.Equals(nickname)).Select(x => x.Nickname.Equals(nickname)).FirstOrDefault();
+            return IsNamePresent;
+        }
     }
 }

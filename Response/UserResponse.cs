@@ -22,5 +22,23 @@ namespace MovieProject.Response
             };
             return response;
         }
+
+        public static List<UserResponse> Map(List<UserEntity> listUser)
+        {
+            List<UserResponse> listUserResponses = new List<UserResponse>();
+            listUser.ForEach(x => 
+            { 
+                listUserResponses.Add(
+                    new UserResponse { 
+                        Nome = x.Name,
+                        Apelido = x.Nickname,
+                        DataNascimento =x.Birth_Date.ToString("dd/MM/yyyy"),
+                        Sexo = x.Sex
+
+                    }); 
+            });      
+            
+            return listUserResponses;
+        }
     }
 }

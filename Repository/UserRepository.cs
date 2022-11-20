@@ -34,6 +34,27 @@ namespace Movie.Repository
         }
 
         /// <summary>
+        /// List all users
+        /// </summary>
+        /// <returns>list of user</returns>
+        public List<UserEntity> GetAllUser()
+        {
+            try
+            {
+                List<UserEntity> listUser = _contexto.User.ToList();
+                return listUser;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _contexto.Dispose();
+            }
+        }
+
+        /// <summary>
         /// Search user by ID
         /// </summary>
         /// <param name="id">Id of the movie</param>

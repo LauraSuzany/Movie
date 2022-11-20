@@ -22,6 +22,13 @@ namespace Movie.Controllers
             return Ok(new { Data = response });
         }
 
+        [HttpGet("ListUsers")]
+        public object GetAllUsers()
+        {
+            object response = _userService.GetUsers();
+            return Ok(new { Data = response });
+        }
+
         [HttpGet("Find/{id}")]
         public object GetUserById([FromRoute] int id)
         {

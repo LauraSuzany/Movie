@@ -14,13 +14,12 @@ namespace Movie.Service
             _userRepository = userRepository;
         }
         public object AddUser(UserModel userModel)
-        {
-            //char
-            //userModel.Sexo.GetType();
-            //if ( c)
-            //{
-            //    return $"Sexo '{userModel.Sexo}' invalido, digite 'f' para feminino ou 'm' para masculido";
-            //}
+        {   
+            
+            if (_userRepository.FindByNickname(userModel.Apelido))
+            {
+                return $"O apelindo '{userModel.Apelido}' já está em uso";
+            }
             if (!(userModel.Sexo.Equals('f') || userModel.Sexo.Equals('m')))
             {
                return $"Sexo '{userModel.Sexo}' invalido, digite 'f' para feminino ou 'm' para masculido";

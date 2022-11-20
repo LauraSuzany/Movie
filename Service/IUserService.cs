@@ -6,5 +6,6 @@ namespace Movie.Service
     public interface IUserService
     {
         public object AddUser(UserModel userModel);
+        public object FindByID(long id);
     }
 }

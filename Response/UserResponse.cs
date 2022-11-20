@@ -11,14 +11,14 @@ namespace MovieProject.Response
         public string DataNascimento { get; set; }
         public char Sexo { get; set; }
 
-        public static UserResponse Map(UserModel userModel)
+        public static UserResponse Map(UserEntity userEntity)
         {
             UserResponse response = new UserResponse
             {
-                Nome = userModel.Nome,
-                Apelido = userModel.Apelido,
-                DataNascimento = DateTime.Parse(userModel.DataNascimento).ToString("dd/MM/yyyy"),
-                Sexo = userModel.Sexo
+                Nome = userEntity.Name,
+                Apelido = userEntity.Nickname,
+                DataNascimento = userEntity.Birth_Date.ToString("dd/MM/yyyy"),
+                Sexo = userEntity.Sex
             };
             return response;
         }

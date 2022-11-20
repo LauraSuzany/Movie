@@ -8,7 +8,7 @@ namespace Movie.Repository
 
         public List<MovieEntity> GetAllMovies();
 
-        MovieEntity FindById(int id);
+        MovieEntity FindById(long id);
 
         public bool FindByName(string name);
 

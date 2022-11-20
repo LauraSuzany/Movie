@@ -1,6 +1,7 @@
 ﻿using Movie.Entity;
 using Movie.Models;
 using Movie.Repository;
+using Movie.Response;
 using MovieProject.Response;
 
 namespace Movie.Service
@@ -33,9 +34,21 @@ namespace Movie.Service
                 Sex = userModel.Sexo,
             };
             _userRepository.AddUser(userEntity);
-            UserResponse userResponse = UserResponse.Map(userModel);
+            UserResponse userResponse = UserResponse.Map(userEntity);
             return userResponse;
         }
+
+        public object FindByID(long id)
+        {
+            UserEntity userEntity = _userRepository.FindById(id);
+            if (userEntity == null)
+            {
+                return $"Não existe um usuário com esse: {id}!";
+            }
+            UserResponse movieResponse = UserResponse.Map(userEntity);
+            return movieResponse;
+        }
+
 
     }
 }

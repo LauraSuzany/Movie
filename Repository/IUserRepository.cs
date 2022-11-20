@@ -7,5 +7,6 @@ namespace Movie.Repository
     {
         public object AddUser(UserEntity userEntity);
         public bool FindByNickname(string nickname);
+        public UserEntity FindById(long id);
     }
 }

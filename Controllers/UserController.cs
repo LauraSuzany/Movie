@@ -21,5 +21,12 @@ namespace Movie.Controllers
             object response = _userService.AddUser(userModel);
             return Ok(new { Data = response });
         }
+
+        [HttpGet("Find/{id}")]
+        public object GetUserById([FromRoute] int id)
+        {
+            object response = _userService.FindByID(id);
+            return Ok(new { Data = response });
+        }
     }
 }

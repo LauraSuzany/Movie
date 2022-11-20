@@ -65,16 +65,16 @@ namespace Movie.Repository
         /// </summary>
         /// <param name="id">Id of the movie</param>
         /// <returns>The object of the movie</returns>
-        public MovieEntity FindById(int id)
+        public MovieEntity FindById(long id)
         {
             try
             {
                 /*.AsNoTracking() foi usado pois está dando um exceção de contexto, pois em alguns métodos são usados mais de um contexto
-                 * de requisição ao banco ex: UpdateMovie() usa findByid (que abre um contexto e isto é rastreado) e UpdateById que abre 
-                 * outro contexto que também é rastreado, logo, como a injeção de dependência é uma singleton os contextos abertos geram 
-                 * conflito logo o método AsNoTracking() não rastreia esse contexto porém ele pode ser usado apenas para requisições que não 
-                 * fazem alteração no banco
-                 */
+                * de requisição ao banco ex: UpdateMovie() usa findByid (que abre um contexto e isto é rastreado) e UpdateById que abre 
+                * outro contexto que também é rastreado, logo, como a injeção de dependência é uma singleton os contextos abertos geram 
+                * conflito logo o método AsNoTracking() não rastreia esse contexto porém ele pode ser usado apenas para requisições que não 
+                * fazem alteração no banco
+                */
 
                 MovieEntity? movieEntity = _contexto.Movie.AsNoTracking().FirstOrDefault(x => x.Id == id);
                 return movieEntity;

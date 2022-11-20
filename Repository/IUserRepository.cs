@@ -11,6 +11,7 @@ namespace Movie.Repository
         public UserEntity FindById(long id);
 
         public UserEntity FindByNickname(string nickname);
+        public UserEntity UpdateById(UserEntity userEntity);
         public void DeleteById(long id);
 
     }

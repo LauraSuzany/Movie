@@ -43,6 +43,13 @@ namespace Movie.Controllers
             return Ok(new { Data = response });
         }
 
+        [HttpPatch("UpdateUser/{id}")]
+        public object GetUserById([FromRoute] long id, [FromBody] UserModel userModel)
+        {
+            object response = _userService.UpdateUser(id, userModel);
+            return Ok(new { Data = response });
+        }
+
         [HttpDelete("DeleteUser/{id}")]
         public object GetUserById([FromRoute] long id)
         {

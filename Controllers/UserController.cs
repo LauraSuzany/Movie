@@ -35,5 +35,12 @@ namespace Movie.Controllers
             object response = _userService.FindByFindByNickname(nickname);
             return Ok(new { Data = response });
         }
+
+        [HttpDelete("DeleteUser/{id}")]
+        public object GetUserById([FromRoute] long id)
+        {
+            object response = _userService.DeleteUser(id);
+            return Ok(new { Data = response });
+        }
     }
 }

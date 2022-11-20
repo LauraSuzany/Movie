@@ -8,5 +8,6 @@ namespace Movie.Service
         public object AddUser(UserModel userModel);
         public object FindByID(long id);
         public object FindByFindByNickname(string findByNickname);
+        public string DeleteUser(long id);
     }
 }

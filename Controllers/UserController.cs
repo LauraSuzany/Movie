@@ -28,5 +28,12 @@ namespace Movie.Controllers
             object response = _userService.FindByID(id);
             return Ok(new { Data = response });
         }
+
+        [HttpGet("FindNickname/{nickname}")]
+        public object GetUserById([FromRoute] string nickname)
+        {
+            object response = _userService.FindByFindByNickname(nickname);
+            return Ok(new { Data = response });
+        }
     }
 }

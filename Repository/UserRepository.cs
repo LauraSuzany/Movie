@@ -81,5 +81,22 @@ namespace Movie.Repository
             UserEntity? findNickname = userEntity.Where(x => x.Nickname.Equals(nickname)).FirstOrDefault();
             return findNickname;
         }
+        public void DeleteById(long id)
+        {
+            try
+            {
+                _contexto.User.Remove(FindById(id));
+                _contexto.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _contexto.Dispose();
+            }
+        }
+
     }
 }

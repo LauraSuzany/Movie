@@ -61,5 +61,16 @@ namespace Movie.Service
             UserResponse movieResponse = UserResponse.Map(findNickname);
             return movieResponse;
         }
+
+        public string DeleteUser(long id)
+        {
+            UserEntity findUserbyId = _userRepository.FindById(id);
+            if (findUserbyId == null)
+            {
+                return $"O usuário com id: {id} não existe!";
+            }
+            _userRepository.DeleteById(id);
+            return $"O usuário foi deletado com sucesso!";
+        }
     }
 }

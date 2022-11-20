@@ -14,10 +14,11 @@ namespace Movie.Service
         {
             _userRepository = userRepository;
         }
+
         public object AddUser(UserModel userModel)
         {   
             
-            if (_userRepository.FindByNickname(userModel.Apelido))
+            if (_userRepository.NicknameExist(userModel.Apelido))
             {
                 return $"O apelindo '{userModel.Apelido}' já está em uso";
             }
@@ -49,6 +50,16 @@ namespace Movie.Service
             return movieResponse;
         }
 
-
+        public object FindByFindByNickname(string findByNickname)
+        {
+           
+            if (!_userRepository.NicknameExist(findByNickname))
+            {
+                return $"Não existe um usuário com esse nickname: '{findByNickname}'";
+            }
+            UserEntity findNickname = _userRepository.FindByNickname(findByNickname);
+            UserResponse movieResponse = UserResponse.Map(findNickname);
+            return movieResponse;
+        }
     }
 }

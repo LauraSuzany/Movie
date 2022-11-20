@@ -63,11 +63,23 @@ namespace Movie.Repository
         /// </summary>
         /// <param name="nickname"></param>
         /// <returns>true or false</returns>
-        public bool FindByNickname(string nickname)
+        public bool NicknameExist(string nickname)
         {
             DbSet<UserEntity> userEntity = _contexto.User;
             bool IsNamePresent = userEntity.Where(x => x.Nickname.Equals(nickname)).Select(x => x.Nickname.Equals(nickname)).FirstOrDefault();
             return IsNamePresent;
+        }
+
+        /// <summary>
+        /// find user by nickname
+        /// </summary>
+        /// <param name="nickname">nickname user</param>
+        /// <returns>the object by the nickname</returns>
+        public UserEntity FindByNickname(string nickname)
+        {
+            DbSet<UserEntity> userEntity = _contexto.User;
+            UserEntity? findNickname = userEntity.Where(x => x.Nickname.Equals(nickname)).FirstOrDefault();
+            return findNickname;
         }
     }
 }

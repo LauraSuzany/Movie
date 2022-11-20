@@ -13,5 +13,7 @@ namespace Movie.Context
         }
 
         public DbSet<MovieEntity> Movie { get; set; }
+        public DbSet<EvaluationEntity> Evaluation { get; set; }
+        public DbSet<UserEntity> User { get; set; }
     }
 }

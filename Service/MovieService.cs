@@ -27,11 +27,11 @@ namespace Movie.Service
             }
 
             MovieEntity movieEntity = new MovieEntity() {
-                Nome = movieModel.Nome,
-                DataLancamento = DateTime.Parse(DateTime.Parse(movieModel.DataLancamento).ToString("dd/MM/yyyy")),
-                Categoria = movieModel.Categoria,
-                Classificacao = movieModel.Classificacao,
-                Descricao = movieModel.Descricao
+                Title = movieModel.Nome,
+                ReleaseDate = DateTime.Parse(DateTime.Parse(movieModel.DataLancamento).ToString("dd/MM/yyyy")),
+                Category = movieModel.Categoria,
+                Classification = movieModel.Classificacao,
+                Description = movieModel.Descricao
             };
              _moviesRepository.Add(movieEntity);
             MovieResponse movieResponse = MovieResponse.Map(movieEntity);
@@ -76,11 +76,11 @@ namespace Movie.Service
             
             MovieEntity movieEntityUpdate = new MovieEntity()
             {   Id = id,
-                Nome = movieModel.Nome,
-                DataLancamento = DateTime.Parse(DateTime.Parse(movieModel.DataLancamento).ToString("dd/MM/yyyy")),
-                Categoria = movieModel.Categoria,
-                Classificacao = movieModel.Classificacao,
-                Descricao = movieModel.Descricao
+                Title = movieModel.Nome,
+                ReleaseDate = DateTime.Parse(DateTime.Parse(movieModel.DataLancamento).ToString("dd/MM/yyyy")),
+                Category = movieModel.Categoria,
+                Classification = movieModel.Classificacao,
+                Description = movieModel.Descricao
             };
 
             MovieEntity updatebyId = _moviesRepository.UpdateById(movieEntityUpdate);

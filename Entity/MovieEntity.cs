@@ -4,35 +4,29 @@ using System;
 
 namespace Movie.Entity
 {
-    [Table("Filme")]
+    [Table("Movie")]
     public class MovieEntity
     {
 
         [Key]
         [Column("id")]
-        [Display(Name = "Id")]
         public long Id { get; set; }
 
-        [Display(Name = "Nome")]
-        [Column("nome")]
-        public string Nome { get; set; }
+        [Column("title")]
+        public string Title { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "Data de lancamento")]
-        [Column("data_lancamento")]
-        public DateTime DataLancamento { get; set; }
+        [Column("release_date")]
+        public DateTime ReleaseDate { get; set; }
 
-        [Display(Name = "Descricao")]
-        [Column("descricao")]
-        public string Descricao { get; set; }
+        [Column("description")]
+        public string Description { get; set; }
 
-        [Display(Name = "Categoria")]
-        [Column("categoria")]
-        public string Categoria { get; set; }
+        [Column("category")]
+        public string Category { get; set; }
 
-        [Display(Name = "Classificacao")]
-        [Column("classificacao")]
-        public string Classificacao { get; set; }
+        [Column("classification")]
+        public string Classification { get; set; }
 
     }
 

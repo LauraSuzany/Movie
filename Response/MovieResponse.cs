@@ -14,11 +14,11 @@ namespace Movie.Response
         {
             MovieResponse response = new MovieResponse
             {
-                titulo = movieEntity.Nome,
-                dataLancamento = movieEntity.DataLancamento.ToString("dd/MM/yyyy"),
-                descricao = movieEntity.Descricao,
-                categoria = movieEntity.Categoria,
-                classificacao = movieEntity.Classificacao,
+                titulo = movieEntity.Title,
+                dataLancamento = movieEntity.ReleaseDate.ToString("dd/MM/yyyy"),
+                descricao = movieEntity.Description,
+                categoria = movieEntity.Category,
+                classificacao = movieEntity.Classification,
             };
             return response;
         }

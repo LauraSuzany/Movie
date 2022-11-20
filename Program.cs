@@ -13,6 +13,9 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<Contexto>(options => options.UseSqlServer(StringConexao.stringConexao));
 builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
 builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

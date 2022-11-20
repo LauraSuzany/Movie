@@ -93,7 +93,7 @@ namespace Movie.Repository
         public bool FindByName(string name)
         {
             Microsoft.EntityFrameworkCore.DbSet<MovieEntity> movie = _contexto.Movie;
-            bool IsNamePresent = movie.Where(x => x.Nome.Equals(name)).Select(x => x.Nome.Equals(name)).FirstOrDefault();
+            bool IsNamePresent = movie.Where(x => x.Title.Equals(name)).Select(x => x.Title.Equals(name)).FirstOrDefault();
             return IsNamePresent;
         }
 
@@ -107,7 +107,7 @@ namespace Movie.Repository
             try
             {
                 Microsoft.EntityFrameworkCore.DbSet<MovieEntity> movie = _contexto.Movie;
-                IQueryable<MovieEntity> movieModels = movie.Where(x => x.Nome.Contains(name));
+                IQueryable<MovieEntity> movieModels = movie.Where(x => x.Title.Contains(name));
                 return movieModels;
             }
             catch (Exception ex)

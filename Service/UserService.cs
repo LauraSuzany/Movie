@@ -39,6 +39,17 @@ namespace Movie.Service
             return userResponse;
         }
 
+        public object GetUsers()
+        {
+            List<UserEntity> listUsers = _userRepository.GetAllUser();
+            if (listUsers.Count() == 0)
+            {
+                return $"Não há usuários para serem exibidos.";
+            }
+            List<UserResponse> userResponses = UserResponse.Map(listUsers);
+            return userResponses;
+        }
+
         public object FindByID(long id)
         {
             UserEntity userEntity = _userRepository.FindById(id);

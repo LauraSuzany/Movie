@@ -47,7 +47,7 @@ namespace MovieProject.Service
                  UserIdFk = evaluationModel.UsuarioIdFk,
             };
             _evaluationRepository.AddEvaluation(evaluationEntity);
-            EvaluationResponse userResponse = EvaluationResponse.Map(evaluationModel, movieEntity, userEntity);
+            EvaluationUserMovieResponse userResponse = EvaluationUserMovieResponse.Map(evaluationModel, movieEntity, userEntity);
             return userResponse;
         }
 
@@ -61,7 +61,7 @@ namespace MovieProject.Service
             EvaluationEntity findById = _evaluationRepository.FindById(id);
             if (findById == null)
             {
-                return $"A avaliação com m id: '{id}' não existe!";
+                return $"A avaliação com id: '{id}' não existe!";
             }
 
             MovieEntity movieEntity = _moviesRepository.FindById(evaluationModel.FilmeIdFk);
@@ -80,6 +80,9 @@ namespace MovieProject.Service
             //{
             //    return $"O usuário com id: '{evaluationModel.UsuarioIdFk}' já atribuiu um comentário para este filme!";
             //}
+            
+
+            //dois comentários para o mesmo filme de um usuário coloar validação
 
             EvaluationEntity evaluationEntity = new EvaluationEntity()
             {
@@ -91,7 +94,19 @@ namespace MovieProject.Service
                 UserIdFk = evaluationModel.UsuarioIdFk
             };
             _evaluationRepository.UpdatelEvaluationById(evaluationEntity);
-            EvaluationResponse evaluationResponse = EvaluationResponse.Map(evaluationModel, movieEntity, userEntity);
+            EvaluationUserMovieResponse evaluationResponse = EvaluationUserMovieResponse.Map(evaluationModel, movieEntity, userEntity);
+            return evaluationResponse;
+        }
+
+        public object findEvaluationById(long id)
+        {
+            EvaluationEntity objectEvaluation = _evaluationRepository.FindById(id);
+            if(objectEvaluation == null)
+            {
+                return $"A avaliação com id: '{id}' não existe!";
+            }
+
+            EvaluationResponse evaluationResponse = EvaluationResponse.Map(objectEvaluation);
             return evaluationResponse;
         }
     }

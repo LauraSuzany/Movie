@@ -1,46 +1,22 @@
 ﻿using Movie.Entity;
 using Movie.Response;
-using MovieProject.Models;
 
 namespace MovieProject.Response
 {
-    public class EvaluationResponse
+    public class EvaluationResponse : EvaluationResponseFather
     {
-        public MovieResponse Movie { get; set; }
-
-        public long Id { get; set; }
-
-        public double Nota { get; set; }
-
-        public string? Comentario { get; set; }
-
-        public string DataPostagem { get; set; }
-
-        public UserResponse User { get; set; }
-
-        public static EvaluationResponse Map(EvaluationModel evaluationModel, MovieEntity movieEntity, UserEntity userEntity)
+        public long IdMovieFk { get; set; }
+        public long IduserFk { get; set; }
+        public static EvaluationResponse Map(EvaluationEntity evaluationEntity)
         {
             EvaluationResponse response = new EvaluationResponse
-            {   
-                Id = evaluationModel.Id,
-                Nota = evaluationModel.Nota,
-                Comentario = evaluationModel.Comentario,
+            {
+                Id = evaluationEntity.Id,
+                Nota = evaluationEntity.Note,
+                Comentario = evaluationEntity.Comment,
                 DataPostagem = DateTime.Now.ToString("dd/MM/yyyy HH'h':mm'm'"),
-                Movie = new MovieResponse { 
-                    id = movieEntity.Id,
-                    titulo = movieEntity.Title, 
-                    dataLancamento = movieEntity.ReleaseDate.ToString("dd/MM/yyyy"),
-                    descricao = movieEntity.Description,
-                    categoria = movieEntity.Category,
-                    classificacao = movieEntity.Classification
-                },
-                User = new UserResponse { 
-                    id = userEntity.Id,
-                    Nome = userEntity.Name, 
-                    Apelido = userEntity.Nickname, 
-                    DataNascimento = userEntity.Birth_Date.ToString("dd/MM/yyyy"), 
-                    Sexo = userEntity.Sex 
-                }
+                IdMovieFk = evaluationEntity.MovieIdFk,
+                IduserFk = evaluationEntity.UserIdFk
             };
             return response;
         }

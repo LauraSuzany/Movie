@@ -30,5 +30,12 @@ namespace MovieProject.Controllers
             object response = _evaluationService.UpdateEvaluation(id, evaluationModel);
             return Ok(new { Data = response });
         }
+
+        [HttpGet("FindEvaluation/{id}")]
+        public IActionResult findEvaluationById([FromRoute] long id)
+        {
+            object response = _evaluationService.findEvaluationById(id);
+            return Ok(new { Data = response });
+        }
     }
 }

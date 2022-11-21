@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Movie.Entity;
-using Movie.Service;
 using MovieProject.Models;
 using MovieProject.Service;
 
@@ -24,10 +22,17 @@ namespace MovieProject.Controllers
             return Ok(new { Data = response });
         }
 
-        [HttpPatch("UpdateEvaluation/{id}")]
-        public IActionResult Create([FromRoute] long id ,[FromBody] EvaluationModel evaluationModel)
+        [HttpPatch("UpdateEvaluation/UserId/{userId}/MovieId/{movieId}")]
+        public IActionResult UpdateEvaluation([FromRoute] long userId, long movieId, [FromBody] EvaluationModel evaluationModel)
         {
-            object response = _evaluationService.UpdateEvaluation(id, evaluationModel);
+            object response = _evaluationService.UpdateEvaluation(userId, movieId, evaluationModel);
+            return Ok(new { Data = response });
+        }
+
+        [HttpGet("FindEvaluation/{id}")]
+        public IActionResult findEvaluationById(long id)
+        {
+            object response = _evaluationService.findEvaluationById(id);
             return Ok(new { Data = response });
         }
     }

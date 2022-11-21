@@ -9,5 +9,7 @@ namespace MovieProject.Repository
         public List<EvaluationEntity> GetAllEvaluation();
         public EvaluationEntity UpdatelEvaluationById(EvaluationEntity evaluationEntity);
         public EvaluationEntity FindById(long id);
+        public EvaluationEntity FindEvaluator(long userIdFk);
+        public EvaluationEntity FindRatedMovie(long movieIdFk);
     }
 }

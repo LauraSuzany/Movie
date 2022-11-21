@@ -53,7 +53,11 @@ namespace MovieProject.Repository
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Find evaluation by id
+        /// </summary>
+        /// <param name="id"> id evaluation</param>
+        /// <returns>evaluation</returns>
         public EvaluationEntity FindById(long id)
         {
             try
@@ -65,6 +69,28 @@ namespace MovieProject.Repository
             {
                 throw ex;
             }
+        }
+
+        /// <summary>
+        /// Find evaluator
+        /// </summary>
+        /// <param name="userIdFk">user id </param>
+        /// <returns>the user that make the evaluation</returns>
+        public EvaluationEntity FindEvaluator(long userIdFk)
+        {
+            EvaluationEntity? evaluator = _contexto.Evaluation.AsNoTracking().Where(x => x.UserIdFk == userIdFk).FirstOrDefault();
+            return evaluator;
+        }
+
+        /// <summary>
+        /// Get Movie evaluation by user
+        /// </summary>
+        /// <param name="movieIdFk">movie id</param>
+        /// <returns>Rated movie</returns>
+        public EvaluationEntity FindRatedMovie(long movieIdFk)
+        {
+            EvaluationEntity? ratedMovie = _contexto.Evaluation.AsNoTracking().Where(x => x.MovieIdFk == movieIdFk).FirstOrDefault();
+            return ratedMovie;
         }
 
         public EvaluationEntity UpdatelEvaluationById(EvaluationEntity evaluationEntity)

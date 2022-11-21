@@ -53,5 +53,37 @@ namespace MovieProject.Repository
                 throw ex;
             }
         }
+
+        public EvaluationEntity FindById(long id)
+        {
+            try
+            {
+                EvaluationEntity? findEvaluationById = _contexto.Evaluation.AsNoTracking().FirstOrDefault(x => x.Id == id);
+                return findEvaluationById;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public EvaluationEntity UpdatelEvaluationById(EvaluationEntity evaluationEntity)
+        {
+            try
+            {
+                _contexto.Evaluation.Update(evaluationEntity);
+                _contexto.SaveChanges();
+                return (evaluationEntity);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _contexto.Dispose();
+            }
+
+        }
     }
 }

@@ -23,5 +23,12 @@ namespace MovieProject.Controllers
             object response = _evaluationService.AddEvaluation(evaluationModel);
             return Ok(new { Data = response });
         }
+
+        [HttpPatch("UpdateEvaluation/{id}")]
+        public IActionResult Create([FromRoute] long id ,[FromBody] EvaluationModel evaluationModel)
+        {
+            object response = _evaluationService.UpdateEvaluation(id, evaluationModel);
+            return Ok(new { Data = response });
+        }
     }
 }

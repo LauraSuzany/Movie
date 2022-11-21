@@ -25,7 +25,7 @@ namespace MovieProject.Response
                 Id = evaluationModel.Id,
                 Nota = evaluationModel.Nota,
                 Comentario = evaluationModel.Comentario,
-                DataPostagem = DateTime.Parse(evaluationModel.DataPostagem).ToString("dd/MM/yyyy"),
+                DataPostagem = DateTime.Now.ToString("dd/MM/yyyy HH'h':mm'm'"),
                 Movie = new MovieResponse { 
                     id = movieEntity.Id,
                     titulo = movieEntity.Title, 

@@ -6,5 +6,6 @@ namespace MovieProject.Repository
     public interface IEvaluationRepository
     {
         public object AddEvaluation(EvaluationEntity evaluationEntity);
+        public List<EvaluationEntity> GetAllEvaluation();
     }
 }

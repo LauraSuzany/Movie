@@ -1,13 +1,13 @@
 ﻿using Movie.Entity;
-using Movie.Models;
 using Movie.Response;
 using MovieProject.Models;
-using MovieProject.Response;
 
 namespace MovieProject.Response
 {
     public class EvaluationResponse
     {
+        public MovieResponse Movie { get; set; }
+
         public long Id { get; set; }
 
         public double Nota { get; set; }
@@ -16,19 +16,31 @@ namespace MovieProject.Response
 
         public string DataPostagem { get; set; }
 
-        public long FilmeIdFk { get; set; }
+        public UserResponse User { get; set; }
 
-        public long UsuarioIdFk { get; set; }
-
-        public static EvaluationResponse Map(EvaluationModel evaluationModel)
+        public static EvaluationResponse Map(EvaluationModel evaluationModel, MovieEntity movieEntity, UserEntity userEntity)
         {
             EvaluationResponse response = new EvaluationResponse
-            {
+            {   
+                Id = evaluationModel.Id,
                 Nota = evaluationModel.Nota,
                 Comentario = evaluationModel.Comentario,
                 DataPostagem = DateTime.Parse(evaluationModel.DataPostagem).ToString("dd/MM/yyyy"),
-                FilmeIdFk = evaluationModel.FilmeIdFk,
-                UsuarioIdFk = evaluationModel.UsuarioIdFk
+                Movie = new MovieResponse { 
+                    id = movieEntity.Id,
+                    titulo = movieEntity.Title, 
+                    dataLancamento = movieEntity.ReleaseDate.ToString("dd/MM/yyyy"),
+                    descricao = movieEntity.Description,
+                    categoria = movieEntity.Category,
+                    classificacao = movieEntity.Classification
+                },
+                User = new UserResponse { 
+                    id = userEntity.Id,
+                    Nome = userEntity.Name, 
+                    Apelido = userEntity.Nickname, 
+                    DataNascimento = userEntity.Birth_Date.ToString("dd/MM/yyyy"), 
+                    Sexo = userEntity.Sex 
+                }
             };
             return response;
         }

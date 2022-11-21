@@ -1,4 +1,5 @@
-﻿using Movie.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using Movie.Context;
 using Movie.Entity;
 using MovieProject.Models;
 
@@ -33,8 +34,24 @@ namespace MovieProject.Repository
                 _contexto.Dispose();
             }
 
-
             return evaluationEntity;
+        }
+
+        /// <summary>
+        /// Get all evaluation
+        /// </summary>
+        /// <returns>list evaluation</returns>
+        public List<EvaluationEntity> GetAllEvaluation()
+        {
+            try
+            {
+                List<EvaluationEntity> listEvaluation = _contexto.Evaluation.AsNoTracking().ToList();
+                return listEvaluation;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ namespace MovieProject.Response
 {
     public class UserResponse
     {
+        public long id { get; set; }
         public string Nome { get; set; }
         public string Apelido { get; set; }
         public string DataNascimento { get; set; }
@@ -14,7 +15,8 @@ namespace MovieProject.Response
         public static UserResponse Map(UserEntity userEntity)
         {
             UserResponse response = new UserResponse
-            {
+            {   
+                id = userEntity.Id,
                 Nome = userEntity.Name,
                 Apelido = userEntity.Nickname,
                 DataNascimento = userEntity.Birth_Date.ToString("dd/MM/yyyy"),
@@ -30,6 +32,7 @@ namespace MovieProject.Response
             { 
                 listUserResponses.Add(
                     new UserResponse { 
+                        id = x.Id,
                         Nome = x.Name,
                         Apelido = x.Nickname,
                         DataNascimento =x.Birth_Date.ToString("dd/MM/yyyy"),

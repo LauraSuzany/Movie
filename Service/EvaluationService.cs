@@ -1,5 +1,4 @@
 ﻿using Movie.Entity;
-using Movie.Models;
 using Movie.Repository;
 using MovieProject.Models;
 using MovieProject.Repository;
@@ -32,6 +31,12 @@ namespace MovieProject.Service
             {
                 return $"O usuário com id '{evaluationModel.UsuarioIdFk}' não existe!";
             }
+
+            List<EvaluationEntity> listEvaluation = _evaluationRepository.GetAllEvaluation(); 
+            if (listEvaluation.Exists(x => x.UserIdFk == evaluationModel.UsuarioIdFk && x.MovieIdFk == evaluationModel.FilmeIdFk))
+            {
+                return $"O usuário com id: '{evaluationModel.UsuarioIdFk}' já atribuiu um comentário para este filme!";
+            }
             EvaluationEntity evaluationEntity = new EvaluationEntity()
             {
                  Note = evaluationModel.Nota,
@@ -40,7 +45,7 @@ namespace MovieProject.Service
                  UserIdFk = evaluationModel.UsuarioIdFk,
             };
             _evaluationRepository.AddEvaluation(evaluationEntity);
-            EvaluationResponse userResponse = EvaluationResponse.Map(evaluationModel);
+            EvaluationResponse userResponse = EvaluationResponse.Map(evaluationModel, movieEntity, userEntity);
             return userResponse;
         }
     }

@@ -13,8 +13,6 @@ namespace MovieProject.Models
 
         public string? Comentario { get; set; }
 
-        public string DataPostagem { get; set; }
-
         public long FilmeIdFk { get; set; }
 
         public long UsuarioIdFk { get; set; }

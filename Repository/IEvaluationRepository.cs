@@ -7,5 +7,7 @@ namespace MovieProject.Repository
     {
         public object AddEvaluation(EvaluationEntity evaluationEntity);
         public List<EvaluationEntity> GetAllEvaluation();
+        public EvaluationEntity UpdatelEvaluationById(EvaluationEntity evaluationEntity);
+        public EvaluationEntity FindById(long id);
     }
 }

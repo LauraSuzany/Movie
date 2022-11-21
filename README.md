@@ -13,7 +13,7 @@
 
 - Documentação no postman e mock de exemplo
 
-![image](https://user-images.githubusercontent.com/83149455/201504963-5f3cb500-4164-4e3b-b2ba-42bb3c9cf7b3.png?w=1600&h=900&crop=1)
+![image](https://user-images.githubusercontent.com/83149455/202969338-9c2393db-8cf9-4037-9e49-e0bb780566a2.png)
 
 <div align="center">
 O obejtivo dessa programa: Fazer o crud com a temática de filme usando boas práticas de programação separando e responsabilidades 

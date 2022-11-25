@@ -16,7 +16,7 @@
 ![image](https://user-images.githubusercontent.com/83149455/202969338-9c2393db-8cf9-4037-9e49-e0bb780566a2.png)
 
 <div align="center">
-O obejtivo dessa programa: Fazer o crud com a temática de filme usando boas práticas de programação separando e responsabilidades 
+O obejtivo dessa programa: Fazer o crud com a temática de filme usando boas práticas de programação separando as responsabilidades 
 (em desenvolvimento 👷)
 
 ✍ "Every day is a learning Day" business: L.M code e Tecnologia

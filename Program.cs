@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Movie.Context;
 using Movie.Repository;
 using Movie.Service;
+using MovieProject;
 using MovieProject.Repository;
 using MovieProject.Service;
 

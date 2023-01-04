@@ -15,11 +15,18 @@ namespace Movie.Controllers
             _movieService = movieService;
         }
 
+        [HttpPost("Upload")]//work here
+        public async Task<IActionResult> UploadCover([FromForm] IFormFile cover, [FromForm] string name)
+        {
+            object response = await _movieService.Upload(cover, name);
+            return Ok(new { Data = response });
+        }
+
         [HttpPost("Create")]
         public IActionResult Create([FromBody] MovieModel movie)
         {
             object response = _movieService.AddMovie(movie);
-            return Ok(new{ Data = response });
+            return Ok(new { Data = response });
         }
 
         [HttpGet("GetMovies")]
@@ -43,12 +50,12 @@ namespace Movie.Controllers
             return Ok(new { Data = movieModels });
         }
 
-        [HttpPatch("Update/{id}")]
-        public IActionResult Update([FromRoute] int id, [FromBody] MovieModel movieModel)
-        {
-            object response = _movieService.UpdateMovie(id, movieModel);
-            return Ok(new { Data = response });
-        }
+        //[HttpPatch("Update")]
+        //public IActionResult Update([FromBody] MovieModel movieModel)
+        //{
+        //    object response = _movieService.UpdateMovie(movieModel);
+        //    return Ok(new { Data = response });
+        //}
 
         [HttpDelete("Delete/{id}")]
         public ObjectResult DeleteById([FromRoute] int id)

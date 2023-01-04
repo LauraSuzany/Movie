@@ -13,8 +13,8 @@ namespace Movie.Service
 
         public object FindByName(string name);
 
-        public object UpdateMovie(int id, MovieModel movieModel);
-
         public string DeleteMovie(int id);
+
+        public Task<object> Upload(IFormFile cover, string name);
     }
 }

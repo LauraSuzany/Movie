@@ -5,6 +5,7 @@ using Movie.Response;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks.Dataflow;
 using System.Xml.Linq;
 
@@ -97,6 +98,50 @@ namespace Movie.Service
             }
             _moviesRepository.DeleteByID(id);
             return $"O filme foi deletado com sucesso!";
+        }
+
+        public async Task<object> Upload(IFormFile cover, string name)
+        {
+            string path = "";
+            try
+            {
+                if (cover.Length > 0)
+                {
+                    int posicaoCaracter = cover.FileName.IndexOf(".");
+                    string newNameCover = name + cover.FileName.Substring(posicaoCaracter);
+                    string extension = ".JPG, .GIF, .PNG, .SVG, .PSD, .WEBP, .RAW, .TIFF";
+                    if (!extension.Contains(cover.FileName.Substring(posicaoCaracter).ToUpper()))
+                    {
+                        return $"Extenção inválida: {cover.FileName.Substring(posicaoCaracter)}";
+                    }
+                   
+                    
+                    path = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "PastaImg"));
+                    if (File.Exists(Path.Combine(path, newNameCover)))
+                    {
+                        return $"O arquivo {newNameCover} já existe.";
+                    }
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+                    using (var fileStream = new FileStream(Path.Combine(path, newNameCover), FileMode.Create))
+                    {
+                        await cover.CopyToAsync(fileStream);
+                    }
+                    return new { Mensagem = "Imagem salva com Sucesso", Caminho = path, Nome = newNameCover };
+                }
+                else
+                {
+                    return "Não foi possível salvar imagem";
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
     }
